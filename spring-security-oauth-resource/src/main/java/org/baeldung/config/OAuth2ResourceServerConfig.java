@@ -21,9 +21,10 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-import org.springframework.jdbc.datasource.init.*;
-import org.springframework.jdbc.datasource.*;
+//import org.springframework.jdbc.datasource.init.*;
+//import org.springframework.jdbc.datasource.*;
 import javax.sql.DataSource;
+import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 
 @Configuration
 @PropertySource({ "classpath:persistence.properties" })
@@ -56,17 +57,17 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
     }
 
     // Remote token service
-    /*
-    @Primary
-    @Bean
-    public RemoteTokenServices tokenService() {
-        final RemoteTokenServices tokenService = new RemoteTokenServices();
-        tokenService.setCheckTokenEndpointUrl("http://localhost:8081/spring-security-oauth-server/oauth/check_token");
-        tokenService.setClientId("fooClientIdPassword");
-        tokenService.setClientSecret("secret");
-        return tokenService;
-    }
-    */
+    
+//    @Primary
+//    @Bean
+//    public RemoteTokenServices tokenService() {
+//        final RemoteTokenServices tokenService = new RemoteTokenServices();
+//        tokenService.setCheckTokenEndpointUrl("http://localhost:8081/spring-security-oauth-server/oauth/check_token");
+//        tokenService.setClientId("fooClientIdPassword");
+//        tokenService.setClientSecret("secret");
+//        return tokenService;
+//    }
+    
 
     // JWT token store
 
@@ -75,7 +76,7 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
         config.tokenServices(tokenServices());
     }
 
-    /*
+    
     @Bean
     public TokenStore tokenStore() {
     return new JwtTokenStore(accessTokenConverter());
@@ -95,7 +96,7 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
     converter.setVerifierKey(publicKey);
     return converter;
     }
-    */
+    
     @Bean
     @Primary
     public DefaultTokenServices tokenServices() {
@@ -106,19 +107,19 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
 
     // JDBC token store configuration
 
-    @Bean
-    public DataSource dataSource() {
-        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
-        dataSource.setUrl(env.getProperty("jdbc.url"));
-        dataSource.setUsername(env.getProperty("jdbc.user"));
-        dataSource.setPassword(env.getProperty("jdbc.pass"));
-        return dataSource;
-    }
-
-    @Bean
-    public TokenStore tokenStore() {
-        return new JdbcTokenStore(dataSource());
-    }
+//    @Bean
+//    public DataSource dataSource() {
+//        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+//        dataSource.setUrl(env.getProperty("jdbc.url"));
+//        dataSource.setUsername(env.getProperty("jdbc.user"));
+//        dataSource.setPassword(env.getProperty("jdbc.pass"));
+//        return dataSource;
+//    }
+//
+//    @Bean
+//    public TokenStore tokenStore() {
+//        return new JdbcTokenStore(dataSource());
+//    }
 
 }
